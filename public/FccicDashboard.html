@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Components</title>
+    <link rel="stylesheet" href="./public/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/public/styles.css" />
+    <style>
+      @media (max-width: 760px) {
+        .overlay {
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.6);
+          z-index: 1;
+          position: absolute;
+        }
+
+        .sidebar {
+          margin-left: -100%;
+        }
+
+        @keyframes animateSidebar {
+          0% {
+            margin-left: -100%;
+          }
+          100% {
+            margin-left: 0;
+          }
+        }
+
+        .reveal-sidebar {
+          display: block !important;
+          transition: all 2s ease-in-out;
+          animation: animateSidebar 0.5s ease-in-out;
+          margin-left: 0;
+        }
+
+        @keyframes animateHideSidebar {
+          0% {
+            margin-left: 0;
+          }
+          100% {
+            margin-left: -100%;
+          }
+        }
+
+        .hide-sidebar {
+          display: block !important;
+          transition: all 2s ease-in-out;
+          animation: animateHideSidebar 0.5s ease-in-out;
+          margin-left: -100%;
+        }
+      }
+
+      .modal {
+        transform: scale(0);
+        transition: all 0.4s ease-in-out;
+      }
+      .reveal-modal {
+        transform: scale(1);
+      }
+    </style>
+  </head>
+  <body>
+    <aside
+      class="sidebar bg-white z-10 shadow-xl md:block w-60 fixed bg-gray-50 h-full overflow-y-scroll"
+    >
+      <div class="bg-white text-center p-3">
+        <img
+          src="/images/fccic logo.png"
+          class="w-12 m-auto object-fit"
+          alt=""
+        />
+      </div>
+
+      <div class="flex flex-col px-6">
+        <a href="" class="p-2 text-sm"
+          ><i class="mr-1 w-4 object-contain fa fa-home"></i> Dashboard</a
+        >
+        <a href="" class="p-2 text-sm flex items-center justify-between"
+          ><span
+            ><i class="mr-1 w-4 object-contain fa fa-users"></i> Members</span
+          >
+          <span class="bg-yellow-400 px-2 text-center rounded text-xs"
+            >13</span
+          ></a
+        >
+        <a href="" class="p-2 text-sm flex items-center justify-between">
+          <span
+            ><i class="mr-1 w-4 object-contain fa fa-book"></i>Messages</span
+          >
+          <span class="bg-yellow-400 px-2 text-center rounded text-xs">27</span>
+        </a>
+        <a href="" class="p-2 text-sm flex items-center justify-between">
+          <span
+            ><i class="mr-1 w-4 object-contain fa fa-mobile"></i>Events</span
+          >
+          <span class="bg-yellow-400 px-2 text-center rounded text-xs"
+            >312</span
+          >
+        </a>
+
+        <a href="" class="p-2 text-sm absolute bottom-0 my-2"
+          ><i class="mr-1 w-4 object-contain fa fa-user-cog"></i>Settings</a
+        >
+      </div>
+    </aside>
+
+    <div class="overlay hidden" id="mainOverlay"></div>
+
+    <main class="ml-0 md:ml-60 relative">
+      <nav
+        class="h-12 w-full bg-blue-600 flex items-center justify-between px-6 bg-blue-900 text-white"
+      >
+        <div class="left-section">
+          <a href="#" class="md:hidden toggler">
+            <i class="fa fa-bars"></i>
+          </a>
+
+          <form class="hidden md:block">
+            <input
+              type="search"
+              class="text-sm w-72 p-1 text-black rounded"
+              placeholder="What are you looking for?"
+            />
+            <button class="p-1 font-bold text-sm hover:text-yellow-500">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <div class="right-section text-sm">
+          <a href="#" class="md:hidden px-2">
+            <i class="fa fa-search"></i> Search
+          </a>
+
+          <a href="" class="px-1">Home</a>
+          <a href="" class="px-1">Login</a>
+          <a href="" class="px-1">Sign out </a>
+        </div>
+      </nav>
+
+      <!-- Modal -->
+      <section
+        class="modal fixed flex bg-white top-0 bottom-0 right-0 left-0 md:left-60 z-10 overflow-y-scroll"
+      >
+        <!-- <div onclick="" class="bg-black fixed h-screen w-screen top-0 bottom-0 left-0 right-0 z-10"></div>  -->
+           
+        <div class=" w-screen mx-auto md:px-16 bg-white">
+            <header class="px-5 md:px-16 py-3">
+                <a href="" class="bg-red-500 px-5 py-3 text-white  items-center rounded">
+                    <i class="mr-1 px-1 object-contain fa fa-arrow-left"></i>Members
+                </a>
+                <p class="py-4 font-semibold text-blue-600">Add new members to Database</p>
+    
+            </header>
+
+            <!-- Form section -->
+            <section class="px-5 md:px-16">
+                <form action="">
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" class="py-2 px-3  rounded my-1 border border-gray-800">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" class="py-2 px-3 rounded my-1 border border-gray-800">
+                        </div>
+                    </article>
+
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="Phone">Phone</label>
+                            <input type="number" class="py-2 px-3  rounded my-1 border border-gray-800">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="Email">Email</label>
+                            <input type="email" class="py-2 px-3 rounded my-1 border border-gray-800">
+                        </div>
+                    </article>
+
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="whatsapp">Whatsapp</label>
+                            <input type="number" class="py-2 px-3  rounded my-1 border border-gray-800">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="street">Street</label>
+                            <input type="text" class="py-2 px-3 rounded my-1 border border-gray-800">
+                        </div>
+                    </article>
+
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="city">City</label>
+                            <input type="text" class="py-2 px-3  rounded my-1 border border-gray-800">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="state">State</label>
+                            <input type="text" class="py-2 px-3 rounded my-1 border border-gray-800">
+                        </div>
+                    </article>
+
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="country">Country</label>
+                            <select name="Country" class="py-2 px-3 rounded my-1 border border-gray-800" id="">
+                                <option value="">Nigeria</option>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="Postal code">Postal code</label>
+                            <input type="number" class="py-2 px-3 rounded my-1 border border-gray-800">
+                        </div>
+                    </article>
+
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="dob">Date of birth</label>
+                            <input type="number" class="py-2 px-3  rounded my-1 border border-gray-800">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="birth month">Birth month</label>
+                            <input type="text" class="py-2 px-3 rounded my-1 border border-gray-800">
+                        </div>
+                    </article>
+
+
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="birth day">Birth Day</label>
+                            <input type="number" class="py-2 px-3  rounded my-1 border border-gray-800">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="date joined">Date Joined</label>
+                            <input type="number" class="py-2 px-3 rounded my-1 border border-gray-800">
+                            <span class="text-xs">Date this member joined fccic</span>
+                        </div>
+                    </article>
+                    <div>
+                        <button class="px-5 py-3 bg-green-500 w-full mt-4">Add member</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+        
+      </section>
+      <!-- End of modal -->
+
+      <section class="max-w-3xl mx-auto">
+        <nav class="text-center p-3 text-sm flex justify-between relative">
+            <button onclick="modal()" class="bg-red-500 px-5 py-3 z-0 text-white  items-center rounded">
+                <i class="mr-1 w-4 object-contain fa fa-plus"></i>Add members
+            </button>
+        </nav>
+        
+        <article class="px-2">
+            <div class="my-2">
+                <h1>All members: 100</h1>
+            </div>
+            <div class="flex w-full">
+                <input type="text" class="block w-full rounded  mx-1 px-3  border border-gray-600" placeholder="Search member">
+                <button class="px-3 bg-gray-200 mx-1 py-2 flex items-center">Sort <i class="mx-2  object-contain fa fa-arrow-up"></i></button>
+                <button class="px-3 bg-gray-200 mx-1 py-2 flex items-center">Sort <i class="mx-2  object-contain fa fa-arrow-down"></i></button>
+            </div>
+        </article>
+
+        <article class="my-5 px-2">
+            <table class="w-full">
+                <tr class="text-gray-600">
+                    <th class="md:px-6 border border-gray-400">S/N</th>
+                    <th class="md:px-6 border border-gray-400"><a href="/public/members.html">firstname</a></th>
+                    <th class="md:px-6 border border-gray-400">Last name</th>
+                    <th class="md:px-6 border border-gray-400">Phone</th>
+                    <th class="md:px-6 border border-gray-400">Referred by</th>
+                    <th class="md:px-6 border border-gray-400">Date joined</th>
+                </tr>
+            </table>
+        </article>
+      </section>
+
+
+
+
+    </main>
+
+    <script src="/public/main.js"></script>
+    <script>
+      sleekSidebar();
+    </script>
+  </body>
+</html>

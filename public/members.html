@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Components</title>
+    <link rel="stylesheet" href="./public/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/public/styles.css" />
+    <style>
+      @media (max-width: 760px) {
+        .overlay {
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.6);
+          z-index: 1;
+          position: absolute;
+        }
+
+        .sidebar {
+          margin-left: -100%;
+        }
+
+        @keyframes animateSidebar {
+          0% {
+            margin-left: -100%;
+          }
+          100% {
+            margin-left: 0;
+          }
+        }
+
+        .reveal-sidebar {
+          display: block !important;
+          transition: all 2s ease-in-out;
+          animation: animateSidebar 0.5s ease-in-out;
+          margin-left: 0;
+        }
+
+        @keyframes animateHideSidebar {
+          0% {
+            margin-left: 0;
+          }
+          100% {
+            margin-left: -100%;
+          }
+        }
+
+        .hide-sidebar {
+          display: block !important;
+          transition: all 2s ease-in-out;
+          animation: animateHideSidebar 0.5s ease-in-out;
+          margin-left: -100%;
+        }
+
+        /* member aside content */
+
+        @keyframes scaleMemberContent {
+          0% {
+            transform: scale(0);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+        .member-aside {
+          position: fixed;
+          display: flex;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          z-index: 99;
+          transform: scale(0);
+          animation: scaleMemberContent 1s ease-in-out;
+        }
+
+        .member-aside-content {
+          transform: scale(0);
+          transition: all 1s ease-in-out;
+        }
+        .reveal-aside-content {
+          transform: scale(1) !important;
+          animation: scaleMemberContent 1s ease-in-out;
+        }
+      }
+
+      .modal {
+        transform: scale(0);
+        transition: all 0.4s ease-in-out;
+      }
+      .reveal-modal {
+        transform: scale(1);
+      }
+    </style>
+  </head>
+  <body>
+    <aside
+      class="sidebar bg-white z-10 shadow-xl md:block w-60 fixed bg-gray-50 h-full overflow-y-scroll"
+    >
+      <div class="bg-white text-center p-3">
+        <img
+          src="/images/fccic logo.png"
+          class="w-12 m-auto object-fit"
+          alt=""
+        />
+      </div>
+
+      <div class="flex flex-col px-6">
+        <a href="" class="p-2 text-sm"
+          ><i class="mr-1 w-4 object-contain fa fa-home"></i> Dashboard</a
+        >
+        <a href="" class="p-2 text-sm flex items-center justify-between"
+          ><span
+            ><i class="mr-1 w-4 object-contain fa fa-users"></i> Members</span
+          >
+          <span class="bg-yellow-400 px-2 text-center rounded text-xs"
+            >13</span
+          ></a
+        >
+        <a href="" class="p-2 text-sm flex items-center justify-between">
+          <span
+            ><i class="mr-1 w-4 object-contain fa fa-book"></i>Messages</span
+          >
+          <span class="bg-yellow-400 px-2 text-center rounded text-xs">27</span>
+        </a>
+        <a href="" class="p-2 text-sm flex items-center justify-between">
+          <span
+            ><i class="mr-1 w-4 object-contain fa fa-mobile"></i>Events</span
+          >
+          <span class="bg-yellow-400 px-2 text-center rounded text-xs"
+            >312</span
+          >
+        </a>
+
+        <a href="" class="p-2 text-sm absolute bottom-0 my-2"
+          ><i class="mr-1 w-4 object-contain fa fa-user-cog"></i>Settings</a
+        >
+      </div>
+    </aside>
+
+    <div class="overlay hidden" id="mainOverlay"></div>
+
+    <main class="ml-0 md:ml-60 relative">
+      <nav
+        class="h-12 w-full bg-blue-600 flex items-center justify-between px-6 bg-blue-900 text-white"
+      >
+        <div class="left-section">
+          <a href="#" class="md:hidden toggler">
+            <i class="fa fa-bars"></i>
+          </a>
+
+          <form class="hidden md:block">
+            <input
+              type="search"
+              class="text-sm w-72 p-1 text-black rounded"
+              placeholder="What are you looking for?"
+            />
+            <button class="p-1 font-bold text-sm hover:text-yellow-500">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <div class="right-section text-sm">
+          <a href="#" class="md:hidden px-2">
+            <i class="fa fa-search"></i> Search
+          </a>
+
+          <a href="" class="px-1">Home</a>
+          <a href="" class="px-1">Login</a>
+          <a href="" class="px-1">Sign out </a>
+        </div>
+      </nav>
+
+      <!-- Members Section -->
+      <section>
+        <header>
+          <figure
+            class="relative"
+            style="
+              background-image: url(/images/nathan-mullet-7bRNqEVb6Zg-unsplash.jpg);
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+              height: 200px;
+            "
+          ></figure>
+          <div class="">
+            <img
+              src="/images/happycustomers.jpg"
+              class="rounded-full w-32 h-32 m-auto z-10 relative -mt-8 border-8 border-white object-cover"
+              alt=""
+            />
+            <div class="py-2 px-4 flex justify-between md:justify-center">
+              <h1>
+                <a href="#" class="text-blue-600 font-semibold"
+                  >Update Profile</a
+                >
+                <span><i class="mx-2 object-contain fa fa-edit"></i></span>
+              </h1>
+
+              <a href="#" class="md:hidden text-2xl asm-toggle">
+                <i class="fa fa-bars"></i>
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <section
+          class="grid grid-cols-1 md:grid-cols-12 max-w-3xl mb-10 mx-auto"
+        >
+          <aside
+            class="member-aside accountDetails md:block col-span-3 h-screen text-gray-700 text-left text-sm px-4"
+          >
+            <div
+              class="member-overlay hidden md:hidden bg-black opacity-50 fixed top-0 bottom-0 right-0 left-0"
+            ></div>
+
+            <ul
+              class="member-aside-content m-auto z-10 bg-white rounded shadow-2xl text-sm md:text-xs"
+            >
+              <li class="py-5 px-5 border">
+                <a href="#">Personal Information</a>
+              </li>
+              <li class="py-5 px-5 border"><a href="#">Update Account</a></li>
+              <li class="py-5 px-5 border"><a href="#">Send Message</a></li>
+              <li class="py-5 px-5 border text-red-500">
+                <a href="#">Delete Account</a>
+              </li>
+            </ul>
+          </aside>
+
+          <script>
+
+           document
+              .querySelector(".asm-toggle")
+              .addEventListener("click", (e) => {
+                  document.querySelector('.member-aside').classList.toggle('reveal-aside-content');
+                document.querySelector('.member-aside-content').classList.toggle("reveal-aside-content");
+                document.querySelector('.member-overlay').classList.toggle('hidden');
+              });
+
+              document.querySelector('.member-overlay').addEventListener('click', e => {
+                document.querySelector('.member-aside').classList.toggle('reveal-aside-content');
+                document.querySelector('.member-aside-content').classList.toggle("reveal-aside-content");
+                document.querySelector('.member-overlay').classList.toggle('hidden');
+              })
+          </script>
+
+          <main class="col-span-9 bg-gray-50 h-screen">
+            <header class="px-3 pt-3">
+              <h1 class="text-center text-gray-800 text-2xl py-2">
+                Personal Information
+              </h1>
+            </header>
+            <section
+              class="grid grid-cols-1 md:grid-cols-2 max-w-3xl px-5 pt-10"
+            >
+              <div>
+                <ul>
+                  <li class="text-sm py-3">Firstname:</li>
+                  <li class="text-sm py-3">Lastname:</li>
+                  <li class="text-sm py-3">Phone:</li>
+                  <li class="text-sm py-3">Email:</li>
+                  <li class="text-sm py-3">Whatsapp:</li>
+                  <li class="text-sm py-3">Street:</li>
+                  <li class="text-sm py-3">City:</li>
+                  <li class="text-sm py-3">State:</li>
+                </ul>
+              </div>
+            </section>
+          </main>
+        </section>
+      </section>
+    </main>
+
+    <script src="/public/main.js"></script>
+    <script>
+      sleekSidebar();
+    </script>
+  </body>
+</html>
